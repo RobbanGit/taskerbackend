@@ -15,7 +15,7 @@ public class Task{
 
     private String description;
 
-    private String authorId;
+    private String author;
 
     private String status;
 
@@ -43,12 +43,12 @@ public class Task{
         this.description = description;
     }
 
-    public String getAuthorId(){
-        return authorId;
+    public String getAuthor(){
+        return author;
     }
 
-    public void setAuthorId(String authorId){
-        this.authorId = authorId;
+    public void setAuthor(String author){
+        this.author = author;
     }
 
     public String getStatus(){

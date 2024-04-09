@@ -8,6 +8,7 @@ import robban.taskerbackend.service.TaskService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class ClientController{
     //service
     @Autowired
@@ -19,7 +20,7 @@ public class ClientController{
     }
 
     //Add patient
-    @PostMapping("/add")
+    @PostMapping("/tasks")
     public String addTask(@RequestBody Task task){
         TaskService.addTask(task);
         return "Task added successfully!";
@@ -39,15 +40,28 @@ public class ClientController{
 
     //Update Task By Id
     @PutMapping("/tasks/{id}")
-    public Task updateTask(@RequestBody Task task){
-        return TaskService.updateTask(task);
+    public Task updateTask(@PathVariable("id") long id, @RequestBody Task task){
+        return TaskService.updateTask(id, task);
+    }
+
+    //Update Task By Id
+    @PatchMapping("/tasks/{id}")
+    public Task updateTaskById(@PathVariable("id") long id, @RequestBody Task task){
+        return TaskService.updateTask(id, task);
     }
 
     //Delete Task By Id
-    @DeleteMapping("task/{id}")
+    @DeleteMapping("tasks/{id}")
     public String deleteTask(@PathVariable("id") long id){
         TaskService.deleteTask(id);
         return "Task with id: " + id + " has been deleted successfully!";
+    }
+
+    //Delete All Tasks
+    @DeleteMapping("tasks")
+    public String deleteAllTasks(){
+        TaskService.deleteTask();
+        return "All tasks have been deleted successfully!";
     }
 
 }
